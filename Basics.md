@@ -11,7 +11,7 @@ Power role:
 * create and share knowledge objects with all users of an app
 *  do realtime searches
 
-User role: 
+User role:
 * only see their own knowledge objects and those that have been shared with them
 
 ### Knowledge objects
@@ -39,11 +39,13 @@ Accessable from "Search" app.
 Create: Search -> Type the command -> Save as -> Report
 ! Set naming convention for organization
 
-* Reports can be scheduled
+* Reports can be scheduled in crontab-like style (runned on fixed time, for example on monday morning, to not be run each time the report is accessed)
 * Reports can be shown only for user, for all users off apps, or in all aps (admin role required)
+* Report execution finish can be chained with Splunk actions (email, webhook, ...)
+* Report can be embedded into any webpage by clicking Edit -> Embed, and then pasting the result to an `iframe` in any html.
 * Report can be run as Owner when viewed by anyone, or by user
 * Reports can be saved as a chart only, as a table of events only, or both
-* There are many visualizations, many of them are interactive
+* Can be added to a dashboard
 
 ### Dashboards
 
@@ -53,6 +55,27 @@ Dasboard is a collections of reports, collected in one tab.
 Create: Search -> Type command -> Save as -> Dashboard -> New
 Append: Search -> Type command -> Save as -> Dashboard -> Existing
 Edit: can reorganize dashboard
+
+### Alerts
+
+* Can notify users with many different ways when results of a scheduled search meet required condition.
+* Triggers when search is completed.
+* They can (for example): list in interface, log event, output to lookup, send to endpoint, send email, ...
+
+Scheduled alert: run alert on a schedule
+Real-time: search is run continiously (starts next after last is finished)
+
+Can be throttled for given period of time (trigger only once in time interval no matter how many times did alert trigger in this interval)
+
+Create:
+1. Create a search
+2. Save as -> Alert
+
+! All triggered alerts can be seen in `Activity` -> `Triggered alerts`
+
+### Alert actions
+
+Set of actions to perform when alert is triggered. Can be build-in (send email or webhook) or something custom (send to slack, telegram,telegram, ...).
 
 ### Search
 
