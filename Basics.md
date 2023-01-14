@@ -82,6 +82,8 @@ Set of actions to perform when alert is triggered. Can be build-in (send email o
 * Commands and raw text terms are not case sensetive! Values of commands are case sensetive!
 * Boolean opeations order: **NOT**, **OR**, **AND**
 
+! Transforming commands -- one that give statistics instead of only modifying the event !
+
 Modes:
 * **Fast**: Field discovery is disabled for this mode,  only returning information on default fields, and fields required to fulfill your search.
 * ***Verboose**: this mode returns as much field and event data as possible, discovering all the fields it can.
@@ -123,3 +125,10 @@ Event types ->
 Tags
 
 This means calculated field (eval) can reference field extractions value, but for example field aliases cannot reference field from lookups.
+
+### Single value visualizations
+
+Can be applied if there is one row in the result.
+// Just play vis options in visualization
+
+! Formatting is also available in multiple rows scenario

@@ -24,12 +24,18 @@ Same results for these two searches
 
 ### `fields` command
 
-includes fields in result
+includes or exclude fields in result.
+can make search more efficient
 ```
 index=web status IN ("500", "503")
 | fields status
 ```
- will only print `status` field
+will only print `status` field
+```
+index=web status IN ("500", "503")
+| fields -user_agent
+```
+will remove `user_agent` field
 
 ### `rename` command
 
@@ -69,3 +75,108 @@ index=dblogs sourcetype=sql
 creates field `sql_table` in events extracted from `_raw` field.
 
 default extraction field (if not stated) will be `_raw`, so it is more correct to state source field as precise as possible to win in computing time.
+
+### `table` command
+
+* similar to `fields` command, but it is transforming command, so it returns statistics insted of events (can be used in report)
+* format: `table field1 field2 field3`
+
+will return fields in given order
+
+### `dedup` command
+
+* Removes duplicated events, keeps only unique values of combination of given columns
+
+```
+index=dblogs sourcetype=sql
+| dedup username ip
+```
+will keep only unique pairs of (username, ip)
+
+### `addtotals` command
+
+* Adds `Total` column with sum of all numeric columns in a row
+* Also can be configured:
+	* change sum axis from rows to cols
+	* change col/row name (depends on the mode)
+
+### `fieldformat` command
+
+* Change the view of data without changing data in event (all changes only in UI)
+
+```
+| fieldformat Total = "$" + tostring(Total, "commas")
+```
+will change `5430.23` to `$5,430.23` in *statistics view*.
+
+### `top` command
+
+* Finds the most common values in the result field
+```
+index=sales
+| top vendor product_name limit=20
+```
+will get top 20 results of `vendor` and `product_name` cols combination
+// default limit is 10
+// see more params in docs
+
+* can be grouped with `by` clause by other column
+```
+| top product_name by Vendor limit=3
+```
+will show top 3 products for each vendor
+
+### `rare` command
+
+* same as `top` command, but searches for the LEAST command
+
+### `stats` command
+
+Stats aggregation functions:
+* `count`
+* `distinct count`
+* `sum`
+* `average`
+* `min`
+* `max`
+* `list`
+* `values`
+
+```
+| stats sum(price) by product_name, store_name
+```
+
+### `chart` command
+
+```
+| chart <a> over <b1>, <b2>
+```
+where `b1, b2, ...` is `X` axis and `a` is Y axis (numeric)
+`a` can be aggregate function
+
+// see other options in docs
+
+### `timechart` command
+
+* same as Chart, by X axis is always time, but `by` can be used to set field names of categorical column to present multiple lines on timechart
+
+```
+| timechart sum(price) by product_name
+```
+
+// `span` arg - time bucket (default = 24h)
+
+### `iplocation` command
+
+Extracts city, country, region, latitude and longitude if available by given ip-address
+```
+index=security
+| iplocation src_ip
+```
+
+### `geostats` command
+
+* visualizes geo events on map
+```
+| geostats latfield=a longfield=b count by product_name
+```
