@@ -14,10 +14,12 @@
 ### Field aliases
 
 Assign alternate name to existing field in data.
+Create: fields settings in splunk
 
 ### Calculated fields
 
 Perform calculations based on the values of existing fields.
+Create: using `eval` command
 
 ### Lookups
 
@@ -45,7 +47,7 @@ Tags are used to assign names to specific field and value combinations. These fi
 
 Create: Event -> Field -> Actioons -> Edit Tags
 
-Use: in search use syntax `tag={{tag_name}}` or `tag::{{field_name}}={{tag_name}}`
+Use: in search use syntax `tag={{tag_name}}` or `tag::{{field_name}}={{tag_name}}` if tag names intersect on different values
 
 Where `tag_name` is the name of the tag, and `field_name` is the original field key of the tag.
 
@@ -58,6 +60,8 @@ Workflow actions rnable a wide variety of interactions between indexed or extrac
 - Launch secondary searches that use one or more field values from selected events.
 - Perform an external search (using Google or a similar web search application) on the value of a specific field found in an event.
 
+Create: Settings -> Fields -> "New" on "Workflow Action"
+
 ### Macros
 
 Similar to event times, also can be reused. But thay can contain variables and act like functions.
@@ -68,6 +72,15 @@ add_object(1) -> rename * as "$object$"
 Arguments: object
 ```
 
+Create: Settings -> Advanced search -> "Add new" for "Search macros"
+
+Use: state name of macros in backtics
+```
+index=abc
+| eval user="@" + username
+| `add_object(abcdefg)`
+```
+
 ### Data models
 
 Hierarchically structured datasets. Consits of three types of datasets:
@@ -76,3 +89,17 @@ Hierarchically structured datasets. Consits of three types of datasets:
 3. Transactions
 
 Allow users to explore data in a graphical interface without ever having to understand Splunk search language.
+
+### Naming convention
+
+- **Group**: Corresponds to the working group(s) of the user saving the search.
+- **Search type**: Indicates the type of search (alert, report, summary-index-populating).
+- **Platform**: Corresponds to the platform subjected to the search.
+- **Category**: Corresponds to the concern areas for the prevailing platforms.
+- **Time interval**: The interval over which the search runs (or on which the search runs, if it is a scheduled search).
+- **Description**: A meaningful description of the context and intent of the search, limited to one or two words if possible. Ensures the search name is unique.
+
+**Possible reports using this naming convention:**
+-   SEG_Alert_Windows_Eventlog_15m_Failures
+-   SEG_Report_iSeries_Jobs_12hr_Failed_Batch
+-   NOC_Summary_Network_Security_24hr_Top_src_ip
