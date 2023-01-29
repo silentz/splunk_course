@@ -135,7 +135,8 @@ Rename fields in search. Does not keep old field names in search context. We can
 
 ```
 ...
-| sort (+|-) <field> [limit=<int> | <int>]
+| sort (+|-) [+|-]<field1> [+|-]<field2> ...
+			 [limit=<int> | <int>]
 ```
 
 * Sorts in ascending order by default
