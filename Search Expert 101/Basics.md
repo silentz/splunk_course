@@ -129,6 +129,6 @@ This means calculated field (eval) can reference field extractions value, but fo
 ### Single value visualizations
 
 Can be applied if there is one row in the result.
-// Just play vis options in visualization
+// Just play with options in visualization
 
 ! Formatting is also available in multiple rows scenario
