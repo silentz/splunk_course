@@ -20,9 +20,9 @@ index=network sourcetype=cisco
 Syntax: ```
 ```
 ...
-| eventsstats <statsfunction1>(<field1>) [as <new_field1>].
-			  <statsfunction2>(<field2>) [as <new_field2>],
-			  ...
+| eventstats <statsfunction1>(<field1>) [as <new_field1>].
+			 <statsfunction2>(<field2>) [as <new_field2>],
+			 ...
 ```
 
 * TLDR: Appends a single calculated value to each event
