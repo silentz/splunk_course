@@ -140,3 +140,39 @@ By using `untable product, country, price` we will transform table to series, wh
   banana |  France | 0.7€
   banana |   Spain | 1.1€
 ```
+
+### `chart` command
+
+Generally, `chart` is used to display a chartable output.
+```
+...
+| chart a over b by c
+```
+is equivalent to
+```
+...
+| stats a by b, c
+...
+| xyseries b c a
+```
+
+### `foreach` command
+
+Syntax: `... | foreach <column_list> [eval ...]`
+
+Example 1: total field will be a sum of all hosts errors, which names start with `www` or `myhost`:
+```
+index=web status>=500
+| chart count by action, host
+| eval total=0
+| foreach www*, myhost*
+	[eval total=total+'<<FIELD>>']
+```
+
+Example 2: do the operation for each field of wildcard `www*`:
+```
+index=web
+| timechart span=1h sum(byets) as totalBytes bu host
+| foreach www*
+	[eval <<FIELD>> = round(<<FIELD>> / (1024 * 1024), 2)]
+```
