@@ -40,7 +40,7 @@ index=web action=remove
 Syntax:
 ```
 ...
-| streamstats <statsfunction1>(<field1>) [as <new_field1>] [by <field_list1>] window=<int> current=<bool>,
+| streamstats <statsfunction1>(<field1>) [as <new_field1>] [by <field_list1>] window=<int> current=<bool>, ...
 ```
 
 * TLDR: calculate cumulative sum/avg/... and append as new column
