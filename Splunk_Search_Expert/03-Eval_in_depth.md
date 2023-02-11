@@ -1,4 +1,4 @@
-### Evaluation functions examples
+## Evaluation functions examples
 
 * `case(X, "Y", ...)` Cycles through expressions and returns first value (Y) where the expression (X) evaluates to TRUE
 * `cidrmatch("X", Y)` returns TRUE or FALSE based on wheather an IP matches a CIDR notation
@@ -13,20 +13,20 @@
 * `validate(X, Y, ...)` opposite of case function: returns Y for the first expression (X) that evaluates to FALSE
 * `searchmatch(X)` return TRUE if the search string X matches the event
 
-### Text functions
+## Eval text functions
 
 * `upper(X)` converts all letters of string `X` to uppercase
 * `lower(X)` converts all letters of string `X` to lowercase
 * `substr(X, from, count)` returns substring `X[from:from+count]` (indexes start with 1)
 * `replace(X, from, to)` replaces **regex** `from` to string `to` in string `X`
 
-### `coalesce` function
+## `coalesce` function
 
 Syntax: `coalesce(X1, X2, ...)`
 
 * `coalesce` returns first non-null value from fields `X1`, `X2`, ...
 
-### `if` function
+## `if` function
 
 Syntax: `if(X, Y, Z)`
 
@@ -37,7 +37,7 @@ Syntax: `if(X, Y, Z)`
 | eval is_parent=if(children > 0, true, false)
 ```
 
-### `case` function
+## `case` function
 
 Syntax: `case(X1, "Y1", X2, "Y2", ...)`
 
@@ -51,7 +51,7 @@ Syntax: `case(X1, "Y1", X2, "Y2", ...)`
 				  score >= 10000, "Advanced")
 ```
 
-### `validate` function
+## `validate` function
 
 Syntax: `validate(X1, "Y1", X2, "Y2", ...)`
 
@@ -64,7 +64,7 @@ Syntax: `validate(X1, "Y1", X2, "Y2", ...)`
 					 	 port >= 1 AND port <= 65535, "Port value is out of range")
 ```
 
-### `in` function
+## `in` function
 
 Syntax: `in(<field>, <value-list>)`
 
@@ -76,7 +76,7 @@ Syntax: `in(<field>, <value-list>)`
 | eval error=if(in(status, "404", "500", "503"), "true", "false")
 ```
 
-### `searchmatch` function
+## `searchmatch` function
 
 Syntax: `eval <field> = if(searchmatch(X), Y, Z)`
 
@@ -88,7 +88,7 @@ Syntax: `eval <field> = if(searchmatch(X), Y, Z)`
 | eval result = if(searchmatch("auth"), "auth event", "non-auth event")
 ```
 
-### `cidrmatch` function
+## `cidrmatch` function
 
 Syntax: `cidrmatch("X", Y)`
 * Returns TRUE/FALSE based in whether proveded IP-address (Y) matches subnet specified by X
@@ -98,7 +98,7 @@ Syntax: `cidrmatch("X", Y)`
 | eval isLocal = if(cidrmatch("10.2.0.0/16", ip), "local", "non-local")
 ```
 
-### `match` function
+## `match` function
 
 Syntax: `match(SUBJECT, "<regex>")`
 
@@ -109,7 +109,7 @@ Syntax: `match(SUBJECT, "<regex>")`
 | eval isNumeric=if(match(src, "^(0|(\-?[1-9][0-9]*))$"), "true", "false")
 ```
 
-### `tostring` function
+## `tostring` function
 
 Syntax: `... | eval <field> = tostring(X, Y)`
 
@@ -119,7 +119,7 @@ Syntax: `... | eval <field> = tostring(X, Y)`
 	* `hex` converts `X` to hexadecimal
 	* `duration` converts `X` to `HH:MM:SS`
 
-### `tonumber` function
+## `tonumber` function
 
 Syntax: `... | eval <field> = tonumber(NUMSTR[, BASE])`
 
@@ -127,57 +127,3 @@ Syntax: `... | eval <field> = tonumber(NUMSTR[, BASE])`
 * Define the base of `NUMSTR` with `BASE` (optional)
 	* Can be from 2 to 36
 	* Defaults to 10
-
-### `fieldformat` command
-
-Syntax: `| fieldformat <field>=<eval-expression>`
-
-* Changes the format of a field's values with an `<eval-expression>`
-* Only changes the appearance, not the underlying value
-* Accepts a wide variety of evaluation functions
-* Should be used late in the pipeline beacuse formatted results cannot be modified by other commands
-
-```
-index=security
-| stats count as totalCount by sourcetype
-| fieldformat totalCount = tostring(totalCount, "commas")
-```
-
-### `where` command
-
-Syntax: `| where <eval expression>`
-
-* Acts as a filter on search results by removing results taht do not match the `<eval-expression>`
-	* Uses mathematical and boolean operators to evaluate values in the expression and return TRUE or FALSE
-	* The `where` commands only returns results that evaluate to TRUE.
-* Interprets unqouted or single-quoted strings as fields and double quoted strings as field values
-* Treats field values in case-sensitive manner
-
-```
-index=web
-| timechart count(eval(action="changedquantity")) as changes,
-			count(eval(action="remove")) as removals
-| where removals > changes
-```
-
-### `where` command: wildcards
-
-* Specify a wildcard by using the `LIKE` operator or the `like` function
-	* `... | where <string> LIKE <pattern>`
-	* `... | where like(<string>, <pattern>)`
-* Do no use `*` as a wildcard, the `where` command will interpret this as a iteral chracter or mathematical operatror
-* Use `%` for multilple characters or `_` for a single character
-
-### `where` command: `isnull` and `isnotnull`
-
-Example with `isnull`:
-```
-index events
-| where isnull(username)
-```
-
-Example with `isnotnull`:
-```
-index events
-| where isnotnull(username)
-```

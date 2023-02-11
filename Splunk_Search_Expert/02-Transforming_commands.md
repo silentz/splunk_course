@@ -1,4 +1,4 @@
-### `chart` command
+## `chart` command
 
 ```
 ...
@@ -27,7 +27,7 @@
 * Alternative syntax: **by** clause with two arguments:
    `| chart <stats-func>(<field>) by <row-split> <column-split>`
 
-### `timechart` command
+## `timechart` command
 
 ```
 ...
@@ -43,24 +43,16 @@
 	* each distinct value of `<split-by-field>` will become a series
 * Further control timechart behaviour with `span` and `limit` options
 
-### `top` command
+## `timewrap` command
+
 ```
 ...
-| top (<field>|<field-list>) [by <field>]
-	   [countfield=<string>] [limit=<int>] [showperc=<bool>]
+| timewrap [<int>]<timescale>
 ```
 
-* Finds the most common values for `<field>` or `<field0list>`
-* By default, outputs top 10 results in table format
-* Group results with a `by <field>` clause
-* Control behavior with `countfield`, `limit` and `showperc` options
+* Can compare data over a specific time period, such as day-over-day or month-over-month
 
-### `rare` command
-
-is the opposite of `top` command
-has the same values
-
-### `stats` command
+## `stats` command
 
 ```
 ...
@@ -81,7 +73,7 @@ has the same values
    ```
    * Can be used with `values(value)` (stats unique values) and `list(value)` (stats all values) aggregate functions
 
-### `eval` command
+## `eval` command
 
 ```
 ...
@@ -105,7 +97,7 @@ has the same values
 * `min(X1, X2, ..., Xn)` returns min value of Xi
 * `random()` takes no arguments and returns a random integer (from 0 to 2^31 - 1)
 
-### `eval` command as a function
+#### `eval` command as a function
 
 * Nest within the `stats count` function to count events with a specific field value
 * Field values are case sensetive and should be wrapped in double quotes
@@ -119,7 +111,7 @@ Example:
 		count(eval(action="session_opened")) as SessionOpened
 ```
 
-### `rename` command
+## `rename` command
 
 ```
 ...
@@ -131,7 +123,7 @@ Example:
 
 Rename fields in search. Does not keep old field names in search context. We can also use wildcards (`product*` (like regex)) in field names.
 
-### `sort` command
+## `sort` command
 
 ```
 ...

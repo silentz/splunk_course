@@ -1,11 +1,11 @@
-### Types of lookups
+## Types of lookups
 
 1. File lookups - loaded from a `.csv` file
 2. Lookups as binary executables or Python scripts
 3. KV Store - access key-value pairs from key-value collections
 4. KMZ files - geospacial lookups
 
-### `inputlookup` command
+## `inputlookup` command
 
 Syntax: `| inputlookup [<filename>|<lookup-definition>]`
 
@@ -14,7 +14,7 @@ Syntax: `| inputlookup [<filename>|<lookup-definition>]`
 * Use a lookup's `<lookup-definition>` name to search lookup tables configured for any lookup type
 * Event-generationg command: should be first command in a search following a pipe character
 
-### `lookup` command
+## `lookup` command
 
 Syntax: `... | lookup <lookup-table-name> <lookup-field>`
 
@@ -32,7 +32,7 @@ Syntax: `... | lookup <lookup-table-name> <lookup-field> [OUTPUT|OUTPUTNEW (<loo
 	* `OUTPUTNEW` do not overwrite existing fields
 * Lookup output fields only exist for the duration of the search
 
-### `outputlookup` command
+## `outputlookup` command
 
 Syntax: `... | outputlookup <filename>|<lookup-definition> createinapp=BOOL`
 
@@ -40,7 +40,7 @@ Syntax: `... | outputlookup <filename>|<lookup-definition> createinapp=BOOL`
 * Can be executed from a search, ad-hoc report, scheduled search or alert
 * `createinapp` option if set to `TRUE`, will output lookup only to directory of current app, `FALSE` will create lookup in system directory
 
-### Adding subsearch
+## Adding subsearch
 
 Syntax: `search ... [subsearch]`
 
@@ -56,7 +56,7 @@ Syntax: `search ... [subsearch]`
 * Subsearch are defaullt limited to 60 seconds and 10k results, if subsearch run to loong or returns too much, it will stop with these limits
 * Use subsearch only if there is no other way to write a search
 
-### `return` command
+## `return` command
 
 Syntax: `return [<count>] [<field>] [<alias>=<field>] [$<field>...]`
 

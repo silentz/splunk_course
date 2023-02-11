@@ -1,4 +1,4 @@
-### `appendpipe` command
+## `appendpipe` command
 
 Syntax: `... | appendpipe [<subpipeline>]`
 
@@ -15,7 +15,7 @@ index=network sourcetype=cisco
 | appendpipe [stats sum(count) by usage]
 ```
 
-### `eventstats` command
+## `eventstats` command
 
 Syntax: ```
 ```
@@ -35,7 +35,7 @@ index=web action=remove
 | eventstats avg(lost_revenue) as average
 ```
 
-### `streamstats` command
+## `streamstats` command
 
 Syntax:
 ```
@@ -59,7 +59,7 @@ index=web action=purchase status=200 productId=123
 | stramstats avg(price) as averagePrice window=100 current=false
 ```
 
-### `fillnull` command
+## `fillnull` command
 
 Syntax: `... | fillnull [value=<string>] [<field-list>]`
 
@@ -73,7 +73,7 @@ index=web
 | fillnull value=unknown username
 ```
 
-### `bin` command
+## `bin` command
 
 Syntax: `... | bin span=<interval> <field>`
 
@@ -84,7 +84,7 @@ index=sales price=*
 | bin span=1000 price
 ```
 
-### `xyseries` command
+## `xyseries` command
 
 Syntax: `... | xyseries <x_field>, <y_field>, <y_data>`
 
@@ -110,7 +110,7 @@ and we would like to see a plot with `_time` as X-axis, `data_transfered` as `Y-
 | xyseries _time, host, data_transfered
 ```
 
-### `untable` command
+## `untable` command
 
 Syntax: `... | untable <col_name>, <row_name>, <new_col_name>`
 
@@ -141,7 +141,7 @@ By using `untable product, country, price` we will transform table to series, wh
   banana |   Spain | 1.1€
 ```
 
-### `chart` command
+## `chart` command
 
 Generally, `chart` is used to display a chartable output.
 ```
@@ -156,7 +156,7 @@ is equivalent to
 | xyseries b c a
 ```
 
-### `foreach` command
+## `foreach` command
 
 Syntax: `... | foreach <column_list> [eval ...]`
 

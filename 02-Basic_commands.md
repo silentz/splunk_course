@@ -118,7 +118,12 @@ index=web
 
 ## `fieldformat` command
 
-* Change the view of data without changing data in event (all changes only in UI)
+Syntax: `| fieldformat <field>=<eval-expression>`
+
+* Changes the format of a field's values with an `<eval-expression>`
+* Only changes the appearance, not the underlying value
+* Accepts a wide variety of evaluation functions
+* Should be used late in the pipeline beacuse formatted results cannot be modified by other commands
 
 Example: will change `5430.23` to `$5,430.23` in *statistics view*
 ```
@@ -126,10 +131,16 @@ Example: will change `5430.23` to `$5,430.23` in *statistics view*
 ```
 
 ## `top` command
+```
+...
+| top (<field>|<field-list>) [by <field>]
+	   [countfield=<string>] [limit=<int>] [showperc=<bool>]
+```
 
-* Finds the most common values in the result field
-* Default limit is 10
-* Can be grouped with `by` clause by other column
+* Finds the most common values for `<field>` or `<field0list>`
+* By default, outputs top 10 results in table format
+* Group results with a `by <field>` clause
+* Control behavior with `countfield`, `limit` and `showperc` options
 
 Example 1: get top 20 results of `vendor` and `product_name` cols combination
 ```

@@ -1,6 +1,6 @@
 Time is stored in `_time` timestamp field. 
 
-### Earliest and latest modiefiers
+## Earliest and latest modiefiers
 
 ```
 ... earliest=[+|-]<timeInt><timeUnit>@<timeUnit>
@@ -29,7 +29,7 @@ Examples (now is 9:45 am of 1st April 2021):
 * `earliest=-7d@d` Looks for events from 00:00:00 on March 25th (7 days before April 1-st) to 09:45 on April 1-st 2021.
 * `earliest=@d+3h` looks for events from 03:00:00 to 09:45:00 on April 1-st 2021.
 
-### Default time fields
+## Default time fields
 
 * events with timestamp information have `date_*` fields
 * Tjese fields are generated for events that include date/timestamp in tje raw data
@@ -37,7 +37,7 @@ Examples (now is 9:45 am of 1st April 2021):
 * These fields do not change based in a user's time zone
 * eg: `date_hour`, `date_mday`, `date_minute`, `date_month`, `date_second`, `date_wday`, `date_year`, `date_zone`
 
-### `bin` command
+## `bin` command
 
 ```
 ...
@@ -48,7 +48,7 @@ Examples (now is 9:45 am of 1st April 2021):
 * time values are adjusted so that all items in a bin share the same time value
 * ! Can also be used with non-time commands just to group numerical values in bins
 
-### Formating time
+## Formating time
 
 * `eval x=now()` - returns the time a search was started
 * `eval x=relative_time(X, Y)` - returns an epoch timestamp relative to a supplied time
@@ -70,26 +70,3 @@ Examples (now is 9:45 am of 1st April 2021):
 	* `%B` is month name (`January, February`, ...)
 	* `%m` is month number (`01-12`)
 	* `%Y` is 4-digit year (eg `2023`)
-
-### `timechart` command
-
-```
-...
-| timechart <stats-func>(<field>) by <split-by-field>
-            [span=<int><timscale>] [limit=<int>]
-```
-
-* Can utilize various statistical aggregate functions:
-	* Comonly used with `count` and `sum` functions
-* Plots and trends data over time where `_time` is always the x-axis
-* Results can be split by another `<field>` using **by** clause
-* The `span` and `limit` options control additional aspects of timechart output
-
-### `timewrap` command
-
-```
-...
-| timewrap [<int>]<timescale>
-```
-
-* Can compare data over a specific time period, such as day-over-day or month-over-month
