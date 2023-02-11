@@ -18,8 +18,8 @@
 	* Group events based on shared values from `<field-list>`
 * Determine event grouping behavior using options:
 	* Ranges of time:
-		* `maxspan` - control maximum total time between transactions events, defaults to `-1` (no span limit)
-		* `maxpause` - control maximum total time between events, defaults to `-1` (no max time limit)
+		* `maxspan` - control maximum total time between first and last transaction events, defaults to `-1` (no span limit)
+		* `maxpause` - control maximum total time between individual events, defaults to `-1` (no max time limit)
 	* Maximum number of events in a transaction: `maxevents`
 	* Values contained in the first/last events: `startswith`, `endswith`
 	* Keep or not non-closed transactions:
