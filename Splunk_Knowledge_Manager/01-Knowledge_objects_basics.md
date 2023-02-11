@@ -1,3 +1,5 @@
+## List of Splunk knowledge objects
+
 * Fields
 * Fields extractions
 * Field aliases
@@ -90,7 +92,7 @@ Hierarchically structured datasets. Consits of three types of datasets:
 
 Allow users to explore data in a graphical interface without ever having to understand Splunk search language.
 
-### Naming convention
+## Naming conventions for knowledge objects
 
 - **Group**: Corresponds to the working group(s) of the user saving the search.
 - **Search type**: Indicates the type of search (alert, report, summary-index-populating).
