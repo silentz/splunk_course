@@ -13,6 +13,11 @@
 * `(index=web OR index=security) NOT status=200`
 	* returns events where `status` is not 200 AND where is no `status` field at all
 
+## `highlight` command
+
+* Highlight text in search results
+* `... | highlight 404 500`
+
 ## `IN` operator
 
 Same results for these two searches:
