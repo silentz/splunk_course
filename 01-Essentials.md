@@ -36,6 +36,20 @@ Roles determine what a user is able to see, do, and interact with. There are th
 #### Data models:
 * hierarchically structed datasets
 
+## Naming conventions for knowledge objects
+
+- **Group**: Corresponds to the working group(s) of the user saving the search.
+- **Search type**: Indicates the type of search (alert, report, summary-index-populating).
+- **Platform**: Corresponds to the platform subjected to the search.
+- **Category**: Corresponds to the concern areas for the prevailing platforms.
+- **Time interval**: The interval over which the search runs (or on which the search runs, if it is a scheduled search).
+- **Description**: A meaningful description of the context and intent of the search, limited to one or two words if possible. Ensures the search name is unique.
+
+**Possible reports using this naming convention:**
+-   SEG_Alert_Windows_Eventlog_15m_Failures
+-   SEG_Report_iSeries_Jobs_12hr_Failed_Batch
+-   NOC_Summary_Network_Security_24hr_Top_src_ip
+
 ## Reports
 * Create: Search -> Type the command -> Save as -> Report
 * Accessable from "Search" app
