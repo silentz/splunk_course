@@ -1,3 +1,20 @@
+## Comments
+
+* Use three backticks before and after your comments
+* Comment out portions of your search to help identify and isolate problems
+* To make very long SPL easier to read, add comments directly after pipe
+
+Example:
+```
+index=security sourcetype=linux
+| ```line chart with week-to-week comparison```
+	timechart span=1d count as Failures
+| timewrap 1w
+| rename _time as Day
+| eval Day = strftime(Day, "%A")
+```
+
+
 ## Default extracted fields
 
 * `_raw`  - plaintext event
