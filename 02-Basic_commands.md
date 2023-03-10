@@ -199,3 +199,36 @@ index=security
 ```
 | geostats latfield=a longfield=b count by product_name
 ```
+
+## `fieldsummary` command
+
+Syntax:
+```
+| ...
+| fieldsummary [maxvals=<int>] [field-list]
+```
+
+* Returns statistics table for each table in output
+* `maxvals` specifies the maximum distinct values to return for each field. Cannot be negative. Set `maxvals = 0` to return all available distinct values for each field. Default `100`.
+* For each field exports statistics, such as:
+	* `count` - number of events that contain this field
+	* `distinct_count` - number of unique values of this field
+	* `is_exact` - wheather or not the `distinct_count` field is exact. If the number of values of the field exceeds `maxvals`, then `fieldsummary` will stop retaining all the values and compute an approximate distinct count instead of an exact one. 1 means it is exact, 0 means it is not.
+	* `max` - maximum value of field (if field is numeric)
+	* `min` - minimum value of field (if field is numeric)
+	* `mean` - mean of field values (if field is numeric)
+	* `stdev` - standart deviation of field values (if field is numeric)
+	* `numeric_count` - number of numeric values of this field
+	* `values` - distinct values and their counts as json
+
+## Informational functions
+
+* `typeof(<field>)` - returns a string that represents the data type of `field`. Possible results: `number`, `string`, `bool`
+
+This functions return true/false depending on the type of `field` argument:
+* `isbool(<field>)`
+* `isint(<field>)`
+* `isnull(<field>)`
+* `isnotnull(<field>)`
+* `isnum(<field>)`
+* `isstr(<field>)`
