@@ -13,19 +13,44 @@
 * Macros
 * Data models
 
+## Field extractions
+
+If data in specific index/sourcetype has a format not recognised by Splunk (not json, key-value, csv, ...), you can use field extractions to extract such fields.
+
+Example: imageine data has the following format
+```
+host: www.test.com, username: admin, action: auth
+```
+
+What we see: obvious key-value pairs in logs
+What Splunk sees by default: one text line
+What Splunk will see after definig regex to parse this: the same as we see
+
 ## Field aliases
 
 Assign alternate name to existing field in data.
-Create: fields settings in splunk
+
+Example: you have 3 different indexes, each of them has its own `username` entity, that are referensing same values in database, but in logs of each application they are written different:
+__index a:__ `user=admin`
+__index b:__ `username=admin`
+__index c:__ `assignee=admin`
+
+To normalize this, field aliases can be used to assign same name of entity in different logs.
 
 ## Calculated fields
 
 Perform calculations based on the values of existing fields.
-Create: using `eval` command
+Create using `eval` command.
 
 ## Lookups
 
 Additional fields and values, which does not contain in the data.
+
+#### Types
+1. File lookups - loaded from a `.csv` file
+2. Lookups as binary executables or Python scripts
+3. KV Store - access key-value pairs from key-value collections
+4. KMZ files - geospacial lookups
 
 ## Event types
 
