@@ -221,6 +221,15 @@ Syntax:
 	* `numeric_count` - number of numeric values of this field
 	* `values` - distinct values and their counts as json
 
+## `tstats` command
+
+Syntax:
+```
+| tstats <stats-func> ...
+```
+
+* Returns information about data schema (indexes, sourcetypes, their fields, ...)
+
 ## Informational functions
 
 * `typeof(<field>)` - returns a string that represents the data type of `field`. Possible results: `number`, `string`, `bool`
